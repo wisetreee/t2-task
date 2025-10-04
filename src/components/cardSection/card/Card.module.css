@@ -1,0 +1,104 @@
+.cardWithFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-family:
+    'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.cardContainer {
+  position: relative;
+  width: 20rem;
+  height: 30rem;
+  clip-path: polygon(45px 0, 100% 0, 100% 100%, 0 100%, 0 45px);
+  border-radius: 8px;
+
+  transition: 0.3s;
+}
+
+.cardContainer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent-blue);
+  clip-path: polygon(45px 0, 100% 0, 100% 100%, 0 100%, 0 45px);
+  border-radius: 8px;
+  z-index: -2;
+  transition: background 0.3s;
+}
+
+.cardContainer::after {
+  content: '';
+  position: absolute;
+  inset: 0.25rem;
+  background: var(--color-content-white);
+  clip-path: polygon(45px 0, 100% 0, 100% 100%, 0 100%, 0 45px);
+  border-radius: 6px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cardContainer:hover::before {
+  background: var(--color-accent-blue-hover);
+}
+
+.cardContainer > * {
+  position: relative;
+  z-index: 1;
+}
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+}
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 1rem 0 0 3rem;
+}
+
+.H2 {
+  color: var(--color-content);
+  font-size: 3rem;
+}
+.descContainer {
+  display: flex;
+  flex-direction: column;
+}
+.cardWithFooter p {
+  font-size: 0.875rem;
+  color: var(--color-content-light);
+  font-weight: 400;
+}
+.cardWithFooter p.subtitle {
+  color: var(--color-content);
+  font-size: 1.5rem;
+}
+
+.image {
+}
+.roundedContainer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  width: 5rem;
+  height: 5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--color-accent-blue);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+p.weightNumber {
+  font-size: 2.6rem;
+  color: var(--color-content-white);
+}
+
+p.weightMeasure {
+  font-size: 1.3rem;
+  color: var(--color-content-white);
+}
