@@ -10,8 +10,31 @@
   justify-content: center;
   gap: 1.5rem;
 }
+
 .cardsContainer {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   width: 100%;
+  gap: 1rem;
+  justify-content: center;
+  align-items: start;
+  justify-items: stretch;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cardsContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .cardsContainer > *:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardsContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

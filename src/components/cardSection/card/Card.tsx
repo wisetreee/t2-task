@@ -1,8 +1,8 @@
-import { type FC } from 'react';
+import { type FC, type HTMLAttributes } from 'react';
 import styles from './Card.module.css';
 import { declension } from '@/lib';
 
-interface CardProps {
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   subtitle: string;
   footer: string;
@@ -31,7 +31,13 @@ export const Card: FC<CardProps> = ({
 }) => {
   return (
     <div className={styles.cardWithFooter}>
-      <div className={styles.cardBorder}>
+      <div
+        className={`
+  ${styles.cardBorder}
+  ${isSelected ? styles.cardBorderSelected : ''}
+  ${isDisabled ? styles.cardBorderDisabled : ''}
+`}
+      >
         <div className={styles.cardContainer}>
           <div className={styles.textContainer}>
             <p>{isSelected && isHovered ? 'Котэ не одобряет?' : 'Сказочное заморское яство'}</p>
@@ -40,12 +46,12 @@ export const Card: FC<CardProps> = ({
               <p className={styles.subtitle}>{subtitle}</p>
             </div>
             <div className={styles.descContainer}>
-              <p>{quantity + ' ' + declension(quantity, ['порция', 'порции', 'порций'])}</p>
               <p>
-                {quantityOfGifts +
-                  ' ' +
-                  declension(quantityOfGifts, ['мышь', 'мыши', 'мышей']) +
-                  ' в подарок'}
+                <b>{quantity}</b> {declension(quantity, ['порция', 'порции', 'порций'])}
+              </p>
+              <p>
+                <b>{quantityOfGifts}</b>{' '}
+                {declension(quantityOfGifts, ['мышь', 'мыши', 'мышей']) + ' в подарок'}
               </p>
               {extraBonus && <p>{extraBonus}</p>}
             </div>
@@ -58,8 +64,18 @@ export const Card: FC<CardProps> = ({
             <p className={styles.weightMeasure}>кг</p>
           </div>
         </div>
-        <p>{footer}</p>
       </div>
+      <p className={styles.footer}>
+        {isDisabled ? (
+          `Печалька, ${subtitle} закончился.`
+        ) : isSelected ? (
+          footer
+        ) : (
+          <>
+            Чего сидишь? Порадуй котэ, <a>купи.</a>
+          </>
+        )}
+      </p>
     </div>
   );
 };

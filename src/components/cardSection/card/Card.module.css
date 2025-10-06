@@ -2,64 +2,72 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.875rem;
   font-family:
     'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.cardContainer {
+.cardBorder {
+  --accent-color: var(--color-accent-blue);
+  --accent-hover: var(--color-accent-blue-hover);
+  --content-dark: var(--color-content);
+  --content-light: var(--color-content-light);
+
   position: relative;
+  padding: 0.25rem;
   width: 20rem;
   height: 30rem;
+  background: var(--accent-color);
   clip-path: polygon(45px 0, 100% 0, 100% 100%, 0 100%, 0 45px);
   border-radius: 8px;
-
   transition: 0.3s;
 }
 
-.cardContainer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--color-accent-blue);
-  clip-path: polygon(45px 0, 100% 0, 100% 100%, 0 100%, 0 45px);
-  border-radius: 8px;
-  z-index: -2;
-  transition: background 0.3s;
+.cardBorder:not(.cardBorderDisabled):hover {
+  --accent-color: var(--color-accent-blue-hover);
 }
 
-.cardContainer::after {
-  content: '';
-  position: absolute;
-  inset: 0.25rem;
+.cardBorderSelected {
+  --accent-color: var(--color-accent-pink);
+  --accent-hover: var(--color-accent-pink-hover);
+}
+
+.cardBorderSelected:not(.cardBorderDisabled):hover {
+  --accent-color: var(--color-accent-pink-hover);
+}
+
+.cardBorderDisabled {
+  --accent-color: var(--color-content-disabled);
+  --content-dark: var(--color-content-disabled);
+  --content-light: var(--color-content-disabled);
+}
+.cardContainer {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
   background: var(--color-content-white);
   clip-path: polygon(45px 0, 100% 0, 100% 100%, 0 100%, 0 45px);
-  border-radius: 6px;
+  border-radius: 8px;
   z-index: 0;
-  overflow: hidden;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.cardContainer:hover::before {
-  background: var(--color-accent-blue-hover);
-}
-
-.cardContainer > * {
-  position: relative;
-  z-index: 1;
-}
 .titleContainer {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 }
 .textContainer {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding: 1rem 0 0 3rem;
+  padding: 1rem 0 0 0;
 }
 
 .H2 {
-  color: var(--color-content);
+  color: var(--content-dark);
   font-size: 3rem;
 }
 .descContainer {
@@ -68,15 +76,20 @@
 }
 .cardWithFooter p {
   font-size: 0.875rem;
-  color: var(--color-content-light);
+  color: var(--content-light);
   font-weight: 400;
 }
 .cardWithFooter p.subtitle {
-  color: var(--color-content);
+  color: var(--content-dark);
   font-size: 1.5rem;
+  font-weight: 600;
 }
-
 .image {
+  position: absolute;
+  top: 12.5rem;
+}
+.cardBorderDisabled .image {
+  opacity: 0.5;
 }
 .roundedContainer {
   position: absolute;
@@ -89,8 +102,8 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: var(--color-accent-blue);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--accent-color);
+  transition: inherit;
 }
 
 p.weightNumber {
@@ -100,5 +113,9 @@ p.weightNumber {
 
 p.weightMeasure {
   font-size: 1.3rem;
+  color: var(--color-content-white);
+}
+
+p.footer {
   color: var(--color-content-white);
 }

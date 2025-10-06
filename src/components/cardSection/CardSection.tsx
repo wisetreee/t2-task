@@ -20,7 +20,8 @@ const cards = [
     image: catImage,
     quantity: 40,
     quantityOfGifts: 1,
-    weight: 2
+    weight: 2,
+    isSelected: true
   },
   {
     title: 'Нямушка',
@@ -30,7 +31,8 @@ const cards = [
     quantity: 100,
     quantityOfGifts: 1,
     weight: 5,
-    extraBonus: 'заказчик доволен'
+    extraBonus: 'заказчик доволен',
+    isDisabled: true
   }
 ];
 
@@ -40,7 +42,7 @@ export const CardSection: FC = () => {
       <h1 className={styles.sectionHeader}>Ты сегодня покормил кота?</h1>
       <div className={styles.cardsContainer}>
         {cards.map((card, index) => (
-          <Card key={index} {...card} />
+          <Card className={styles.card} key={index} {...card} />
         ))}
       </div>
     </section>
