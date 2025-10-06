@@ -14,6 +14,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   isDisabled?: boolean;
   isSelected?: boolean;
   isHovered?: boolean;
+  onClick?: () => void;
 }
 
 export const Card: FC<CardProps> = ({
@@ -27,16 +28,22 @@ export const Card: FC<CardProps> = ({
   weight,
   isDisabled,
   isSelected,
-  isHovered
+  isHovered,
+  className,
+  onClick,
+  ...props
 }) => {
   return (
-    <div className={styles.cardWithFooter}>
+    <div className={`${styles.cardWithFooter} ${className ?? ''}`} {...props}>
       <div
         className={`
   ${styles.cardBorder}
   ${isSelected ? styles.cardBorderSelected : ''}
   ${isDisabled ? styles.cardBorderDisabled : ''}
+  ${isHovered ? styles.cardBorderHovered : ''}
+  
 `}
+        onClick={onClick}
       >
         <div className={styles.cardContainer}>
           <div className={styles.textContainer}>
@@ -72,7 +79,11 @@ export const Card: FC<CardProps> = ({
           footer
         ) : (
           <>
-            Чего сидишь? Порадуй котэ, <a>купи.</a>
+            Чего сидишь? Порадуй котэ,{' '}
+            <a className={styles.link} onClick={onClick}>
+              купи
+            </a>
+            .
           </>
         )}
       </p>

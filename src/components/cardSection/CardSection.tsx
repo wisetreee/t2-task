@@ -2,6 +2,7 @@ import { type FC } from 'react';
 import styles from './CardSection.module.css';
 import { Card } from './card/Card';
 import catImage from '@/assets/cat.png';
+import { useCards } from '@/hooks';
 
 const cards = [
   {
@@ -20,8 +21,7 @@ const cards = [
     image: catImage,
     quantity: 40,
     quantityOfGifts: 1,
-    weight: 2,
-    isSelected: true
+    weight: 2
   },
   {
     title: 'Нямушка',
@@ -37,12 +37,14 @@ const cards = [
 ];
 
 export const CardSection: FC = () => {
+  const { getCardProps } = useCards();
+
   return (
     <section className={`container ${styles.container}`}>
       <h1 className={styles.sectionHeader}>Ты сегодня покормил кота?</h1>
       <div className={styles.cardsContainer}>
         {cards.map((card, index) => (
-          <Card className={styles.card} key={index} {...card} />
+          <Card key={index} {...card} {...getCardProps(index)} className={styles.card} />
         ))}
       </div>
     </section>

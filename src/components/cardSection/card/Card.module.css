@@ -21,9 +21,10 @@
   clip-path: polygon(45px 0, 100% 0, 100% 100%, 0 100%, 0 45px);
   border-radius: 8px;
   transition: 0.3s;
+  cursor: pointer;
 }
 
-.cardBorder:not(.cardBorderDisabled):hover {
+.cardBorderHovered:not(.cardBorderDisabled):not(.cardBorderSelected) {
   --accent-color: var(--color-accent-blue-hover);
 }
 
@@ -32,7 +33,7 @@
   --accent-hover: var(--color-accent-pink-hover);
 }
 
-.cardBorderSelected:not(.cardBorderDisabled):hover {
+.cardBorderSelected.cardBorderHovered:not(.cardBorderDisabled) {
   --accent-color: var(--color-accent-pink-hover);
 }
 
@@ -118,4 +119,10 @@ p.weightMeasure {
 
 p.footer {
   color: var(--color-content-white);
+}
+
+.link {
+  color: var(--color-accent-blue);
+  text-decoration: dashed underline;
+  cursor: pointer;
 }

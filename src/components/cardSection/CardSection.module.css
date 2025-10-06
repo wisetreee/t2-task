@@ -1,6 +1,7 @@
 .sectionHeader {
   font-size: 2.25rem;
   color: var(--color-content-white);
+  text-align: center;
 }
 
 .container {
@@ -14,8 +15,6 @@
 .cardsContainer {
   display: grid;
   width: 100%;
-  gap: 1rem;
-  justify-content: center;
   align-items: start;
   justify-items: stretch;
 }
@@ -36,5 +35,6 @@
 @media (min-width: 1024px) {
   .cardsContainer {
     grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 5vw, 5rem);
   }
 }
